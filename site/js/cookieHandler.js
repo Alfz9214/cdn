@@ -1,11 +1,14 @@
-// cookieHandler.js
+// utils/cookie.js
+import Cookies from 'js-cookie';
 
-// Function to create a cookie
-function setCookie(name, value, days) {
-  const expires = new Date();
-  expires.setTime(expires.getTime() + (days * 24 * 60 * 60 * 1000)); // Set expiration date
-  document.cookie = `${name}=${encodeURIComponent(value)};expires=${expires.toUTCString()};path=/`;
-}
+export const getCookie = (name) => {
+  return Cookies.get(name);
+};
 
-// Export the function for external use
-export { setCookie };
+export const setCookie = (name, value, expires = 365) => {
+  Cookies.set(name, value, { expires });
+};
+
+export const removeCookie = (name) => {
+  Cookies.remove(name);
+};
